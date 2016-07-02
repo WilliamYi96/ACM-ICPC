@@ -1,0 +1,42 @@
+#include<cstdio>
+#include<string>
+#include<iostream>
+using namespace std;
+
+int main() {
+	//We can store up all possible output and then to look up it
+	string helloArray [] = {"HELLO",
+			"HOLA",
+			"HALLO",
+            "BONJOUR",
+            "CIAO",
+            "ZDRAVSTVUJTE"};
+    string languageArray [] = {"ENGLISH",
+            "SPANISH",
+            "GERMAN",
+            "FRENCH",
+            "ITALIAN",
+            "RUSSIAN"};
+    string input;
+    int kase = 0;
+    
+    while(cin >> input && input != "#") {
+    	int len = 6;
+    	bool found = false;
+    	//pay attention to the use of bool value, it is aimed for the search situations 
+    	
+    	for(int i = 0; i < len; i++) {
+    		if(helloArray [i] == input) {
+    			printf("Case %d: %s\n", ++kase, languageArray [i].c_str());
+    			//pay attention to output form of string
+    			found = true;
+    			break;
+			}
+		}
+		
+		if (!found) {
+			printf("Case %d: UNKNOWN\n", ++kase);
+		}
+	}
+	return 0;
+}
