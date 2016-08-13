@@ -1,0 +1,41 @@
+UVa11679-Sub-Prime
+
+Next is the source code of UVa11679:
+
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<string>
+using namespace std;
+
+int main() {
+    int b, n;
+    int reserve[30];
+    while((scanf("%d%d", &b, &n) == 2) && (b+n)) {
+        for(int i = 1; i <= b; i++) scanf("%d", &reserve[i]);
+        for(int i = 0; i < n; i++) {
+            int d, c, v;
+            scanf("%d%d%d", &d, &c, &v);
+            reserve [d] -= v;
+            reserve [c] += v;
+        }
+       
+        bool isBailout = false;
+       
+        for(int i = 1; i <= b; i++) {
+            if(reserve[i] < 0) {
+                isBailout = true;
+                break;   //break just jump out of one loop
+            }
+        }
+        if(isBailout) printf("N\n");
+        else printf("S\n");
+    }
+    return 0;
+} 
+
+Tips: This is a problem ralated to finance. Due to the fact that I am innocent about finance, 
+  the bigest problem is how to understand the problem correctly. 
+  In my further study, I need to care not only about the development of software but also other knowledge.
+  
+  
