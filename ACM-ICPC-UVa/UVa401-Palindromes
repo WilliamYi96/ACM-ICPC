@@ -1,0 +1,43 @@
+UVa401-Palindromes
+
+Here is the source code of the problem UVa401:
+#include<cstdio>
+#include<cstring>
+#include<ctype.h>   //isaloha is defined in it
+const char* rev = "A   3  HIL JM O   2TUVWXY51SE Z  8 ";    ......a
+  //we store all the character in a point array===think
+  //this is all the possible reversed character
+const char*msg[] = {"not a palindrome", "a regular palindrome", "a mirrored string", "a mirrored palindrome"};  ......b
+        
+char r(char ch) {   ......c 
+    if(isalpha(ch))  return rev[ch - 'A'];
+    return rev[ch - '0' + 25];
+}
+
+int main() {
+  char s[30];
+  while(scanf("%s", s) == 1) {    ......d
+      int len = strlen(s);
+      int p = 1, m = 1;
+      for(int i = 0; i < (len+1)/2; i++) {
+          if(s[i] != s[len-1-i]) p = 0;             //isn't a mirrored palidrome
+          if(r(s[i]) != s[len-1-i]) m = 0;        //isn't a mirrored string
+      }
+      printf("%s -- is %s.\n\n", s, msg[m*2+p]);    ......e
+   }
+    return 0;
+}
+
+Tips:
+a) const char* rev is the pointer pointed to const, while const* char rev is the const pointer 
+  which means you can not change the point of the pointer. 
+  If we store all the possible reversed characters in a const pointing array, it will be easy to manipulate it;
+b) In some degree, b is same as a because both of them are the pointer pointed to const, it will be easy for our use latter;
+c) using isalpha(char) to judge whether ch is a alphabet, 
+  if it is true, then ch - 'A', we can get the relative position of char in the const char * rev. If not, it must be a number, then we map it into the rev. But pay attention, we should add 25 in the end.
+d) we always use scanf("%x", (&)m) == 1 to get a bunch of input data, 
+  if we don't input according to this rule, it will return zero, then the recursion will come to an end;
+e) we can just use m*2+p to get the four possible situations, 
+  this is possible because any one of these four situations has one thing in common with each other.
+  
+  
