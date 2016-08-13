@@ -1,0 +1,20 @@
+UVa10550-Combination Lock
+
+#include<cstdio>
+int main() {
+    int pos, a, b, c;
+    int m, n, t;
+    while((scanf("%d%d%d%d", &pos, &a, &b, &c) == 4) && pos+a+b+c) {
+        if(pos < a) m = 40 - a + pos;
+        else m = pos - a;
+        if(a > b) n = 40 - a + b;
+        else n = b - a;
+        if(c > b) t = 40 - c + b;
+        else t = b - c;
+        printf("%d\n", 1080 + 9 * (m + n + t));
+    }
+    return 0;
+}
+
+Tips: This problem need us to use some basic knowledge about math and pay special attention to the direction that open the lock.
+  (clockwise or anticlockwise) Overall, it is a very easy problem.
