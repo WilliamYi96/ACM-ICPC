@@ -1,0 +1,135 @@
+STL in ACM(a)--Vector, Set and Map
+
+  Today I have learned some basic knowledge about STL(Standard Template Library). 
+  It is very helpful to use it in a program meanwhile it might be a little difficult for me to handle. 
+  Next is some basic template in it.
+  
+  A)Vector
+  Vector is an uncertain array and it has encapsulated some useful operations. 
+  For example, if a is a vector, then we can use a.size() to get the size of a while use a.resize() to change it, 
+  and we can also use a.push_back() to add element in the afterbody while a.pop_back() to delete the last element. 
+  Due to the fact that vector is a template, we need to use vector<int> a or vector<double> b to declare a vector. 
+  vector<int> is similar to int a[] while vector<string> is similar to string a[].
+  Here is an example about vector.(UVa101-The Blocks Problem)
+  #include<cstdio>
+  #include<string>
+  #include<vector>
+  #include<iostream>
+  using namespace std;
+  const int maxn = 30;
+  int n;
+  vector<int> pile[maxn].....
+
+  B)set
+  set is a common container and it is just like set in math, which means every element in it can only appear once.
+  Here is an example about set.(UVa10815-Andy's First Dictionary)
+  #include<iostream>
+  #include<string>
+  #include<set>
+  #include<sstream>
+  using namespace std;
+
+  set<string> dict;  //declare the set of string
+  int main() {
+    string s, buf;
+    while(cin >> s) {                                                 //......a
+      for(int i = 0; i < s.length(); i++) {                     //......b
+      if(isalpha(s[i])) s[i] = tolwer(s[i)); else s[i] = ' '; //......c
+      stringstream ss(s);                                            //......d
+      while(ss >> buf) dict.insert(buf);                     //......e
+    }
+    for(set<string>::iterator it = dict.begin(); it != dict.end(); ++it)
+    cout << *it  << "\n";                                          //......f
+    return 0;
+  } 
+
+  Next is some explanations and tips about above code:
+a) As we have define the type string in cpp, we can use cin >> s to get a string directly;
+b) How to get the length of a string? We can get it by using s.length() while we can get the length of a charater array by using strlen(s);
+c) We can use isalpha(a[i]) to judge whether the element in a[i] is an alphabet. And the function of tolower() is to convert the uppercase into lowercase;
+d) The use of stringstream.One typical example comes:
+  #include<sstream>
+  #include<iostream>
+  using namespace std;
+
+  int main() {
+    string line, word;
+    //word is the string in the long string,
+    // and then ss can be a greater string
+    while(getline(cin, line)) {
+    stringstream ss(line);
+    cout << ss.str() << endl;
+    while(ss >> word) { cout << word << endl;}
+    }
+    return 0;
+  } 
+
+Input:
+  My name is William Yi
+Output:
+  My name is William Yi
+  My
+  name
+  is
+  William
+  Yi
+
+In conclusion, if s is a string then ss can be the a greater string. 
+We can use ss.str() to get the total greater stream and we can use ss >> s to get the smaller string just like the example above.
+
+e) dict.insert(buf). This statement will put the string buf into the string set dict;
+f) iterator just like point and we can use it to sort all the stirng in set.
+
+
+
+  C)map
+  map is from key to value, because it has overloaded the operator [], map can be viewed as the high standard form of array. 
+  For example, we can use map<string, int>month_name to realize a map from the name of a month to its number, 
+  then to assign value by using month_name["July"] = 7.
+  Next is one typical example of the using of map.(UVa156-Ananagrams)
+
+  #include<iostream>
+  #include<string>
+  #include<cctype>
+  #include<vector>
+  #include<map>
+  #include<algorithm>
+  using namespace std;
+
+  map<string, int> cnt;
+  vector<string> words;
+
+  //standardize the word s
+  string repr(const string& s) {
+    string ans = s;
+    for(int i = 0; i < ans.length(); i++) {
+      ans[i] = tolower(ans[i]);  
+      //convert the uppercase into lowercase
+      sort(ans.begin(), ans.end());
+      //sort the string in ans(s)
+      return ans;
+    }
+  }
+
+  int main() {
+    int n = 0;
+    string s;
+    while(cin >> s) {
+      if(s[0]=='#') break;    //files will end up with "#"
+      words.push_back(s);        //add the string in the string vector words
+      string r = repr(s);      //r is the standard form of s
+      //cout << cnt.count(r);
+      if(!cnt.count(r)) cnt[r] = 0;  //pay attention to this method, this will discuss later
+      cnt[r]++;
+    }
+    vector<string> ans;
+    //cout << words.size();
+    for(int i = 0; i < words.size(); i++)
+    //what is the answer when we calculate the words.size()? this is the number of words
+      if(cnt[repr(words[i])]==1) ans.push_back(words[i]);  //this is another key, I will discuss later
+    sort(ans.begin(), ans.end());
+    for(int i = 0; i < ans.size(); i++)
+      cout << ans[i] << endl;
+    return 0;
+  }
+//As it is too much to write all in a minute, I will finish it tomorrow!
