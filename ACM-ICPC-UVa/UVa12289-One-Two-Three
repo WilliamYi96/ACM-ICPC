@@ -1,0 +1,100 @@
+UVa12289-One-Two-Three
+
+This main topic is to judge whether the word the sister spelt can be right at most change one word.
+There are at least three methods to solve this problem.
+
+A) Unsigned Variables
+
+#include<cstdio>
+#define o 111
+#define n 110
+#define e 101
+//This number is corresponding to
+//the corresponding letters ascll code values
+static char s[8];
+
+int main() {
+    register unsigned t;
+    //what is the advantage of using the register unsigned variable?(It remains to be seen, but it is a powerful method)
+    scanf("%u", &t); 
+    //pay attention to the input form of the register unsigned variable
+   
+    while(t--) {
+        scanf("%s", s);
+        if(s[3]) {
+            //if s[3] is not empty, the string must be three
+            printf("3\n");      
+            //we can just input the word's number directly
+            //instead of using an array to map them
+        }else {
+            unsigned s0 = s[0];
+            unsigned s1 = s[1];
+            unsigned s2 = s[2];
+            if((s0 == o && s1 == n) || (s0 == 0 && s2 == e) || (s1 == n && s2 == e))
+                //judge whether the words are similar to "one"
+                printf("1\n");
+            else printf("2\n");
+        }
+    }
+    return 0;
+}
+
+B) Direct Form
+
+#include<cstdio>
+#include<cstring>
+
+int main() {
+    int t;
+    scanf("%d", &t);
+    while(t--) {
+        char a[10];
+        scanf("%s", a);
+        if(strlen(a) == 5) printf("3\n");
+        else {
+            int cnt = 0;
+            if(a[0] == 'o') cnt++;
+            if(a[1] == 'n') cnt++;
+            if(a[2] == 'e') cnt++;
+            if(cnt >= 2) printf("1\n");
+            else printf("2\n");
+        }
+        //This is a very simple but very practical method
+    }
+    return 0;
+}
+//it has a little skills, but it really works well.
+
+C) Array Store
+
+#include<cstdio>
+#include<cstring>
+using namespace std;
+char one[] = {'o', 'n', 'e'};
+
+int main() {
+    int t, result;
+    char words[10];
+    scanf("%d", &t);
+    while(t--) {
+        int count = 0, len = 0;
+        memset(words, '\0', sizeof(words));
+        //printf("%d", t);
+        scanf("%s", words);
+        if (strlen(words) == 5) result = 3;
+        else{for(int i = 0; i < 3; i++) {
+            if(one[i] != words[i]) count++;
+             //just compare it in the corresponding elements in the corresponding array
+             }
+            if(count <= 1) result = 1;
+                //if the incorresponding elements is no more than one, then it will be one.
+                else result = 2;
+        }   
+        printf("%d\n", result);
+    }
+    return 0;
+}
+
+Tips:
+  This problem is a combination with string and array. Easy as it is, it is very typical.
+  Overall, about this problem I need to learn more.
