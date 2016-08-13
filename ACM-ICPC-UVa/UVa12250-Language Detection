@@ -1,13 +1,18 @@
+UVa12250-Language Detection
+
+Here is the source code of UvA12250:
+solution A:
+
 #include<cstdio>
 #include<string>
 #include<iostream>
 using namespace std;
 
 int main() {
-	//We can store up all possible output and then to look up it
-	string helloArray [] = {"HELLO",
-			"HOLA",
-			"HALLO",
+    //We can store up all possible output and then to look up it
+    string helloArray [] = {"HELLO",                                                 ......a
+            "HOLA",
+            "HALLO",
             "BONJOUR",
             "CIAO",
             "ZDRAVSTVUJTE"};
@@ -19,24 +24,67 @@ int main() {
             "RUSSIAN"};
     string input;
     int kase = 0;
-    
-    while(cin >> input && input != "#") {
-    	int len = 6;
-    	bool found = false;
-    	//pay attention to the use of bool value, it is aimed for the search situations 
-    	
-    	for(int i = 0; i < len; i++) {
-    		if(helloArray [i] == input) {
-    			printf("Case %d: %s\n", ++kase, languageArray [i].c_str());
-    			//pay attention to output form of string
-    			found = true;
-    			break;
-			}
-		}
-		
-		if (!found) {
-			printf("Case %d: UNKNOWN\n", ++kase);
-		}
-	}
-	return 0;
+   
+    while(cin >> input && input != "#") {                                        ......b
+        int len = 6;
+        bool found = false;                                                                 ......c
+        //pay attention to the use of bool value, it is aimed for the searching situations
+      
+        for(int i = 0; i < len; i++) {
+            if(helloArray [i] == input) {
+                printf("Case %d: %s\n", ++kase, languageArray [i].c_str());    .........d
+                //pay attention to output form of string
+                found = true;
+                break;
+            }
+        }
+      
+        if (!found) {
+            printf("Case %d: UNKNOWN\n", ++kase);
+        }
+    }
+    return 0;
 }
+ 
+solution B: 
+
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+string m[] = {"ENGLISH", "SPANISH", "GERMAN", "FRENCH", "ITALIAN", "RUSSIAN", "UNKNOWN"};
+
+int main() {
+    int kase = 0;
+    string s, result;
+    while(cin >> s && s!="#") {
+        //switch(s) {
+        //    case("HELLO"):                                                                                ........e
+        //}this can't use switch as it will jump out from the recurion
+        if(s == "HELLO") result = m[0];
+        else if(s == "HOLA") result = m[1];
+        else if(s == "HALLO") result = m[2];
+        else if(s == "BONJOUR") result = m[3];
+        else if(s == "CIAO") result = m[4];
+        else if(s =="ZDRAVSTVUJTE") result = m[5];
+        else result = m[6];
+        //printf("%s\n", result.c_str());
+        //pay attention to the output form of the string
+        printf("Case %d: ", ++kase);
+        cout << result << endl;
+    }
+    return 0;
+}
+Tips:
+a) First, we can store all the possible input and all the possible output situations, and then look it up if necessary. 
+	Next, we compare the helloArray with the input string, if found, then found can be true;
+b) We use C++ style to input an array like this: cin >> input while we use C style to input a string like this: scanf("%s", s);
+c) bool value is aimed at the searching situation, if we can not break from a recursion, then we can use bool to symbol the value. 
+	In this program, we symbol the found. If found, found can be true, if not, it will be false. 
+	Its greatest advantage is that we can read our program easily by using the intuitional words;
+d) printf("Case %d: %s\n", ++kase, languageArray [i].c_str());   This is the output form of a stirng.
+	We need to add .c_str() in the end;
+e) pay attention to the use of case: If we have many possible situation, 
+	then we may use case to simplify the situations' statements.
+	
+	
