@@ -1,0 +1,87 @@
+UVa 11332-Summing digits
+
+  There are at least three versions about solving this problem. Next is the code of this method:
+
+version 1 (a direct manipulation)
+
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+#include<string>
+using namespace std;
+#define maxn = 30
+
+int main() {
+    long long int input;
+    while(cin >> input) {
+        int ans = 0;
+        if(input == 0) return 0;       
+        while(1) {                                                                           ........a
+            while(input) {
+                ans += (input % 10);
+                input /= 10;
+            }
+            if(ans / 10) {input = ans; ans = 0;}
+            else break;
+        }
+        printf("%d\n", ans);
+    }
+    return 0;
+}
+
+
+version 2 (recursions)
+
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+#include<string>
+using namespace std;
+
+int n;
+
+int recurse(int n) {                                                                     .......b
+    int sum = 0;
+    while(n) {
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum / 10 == 0? sum : recurse(sum);
+}
+
+int main() {
+    for(;;) {
+        scanf("%d", &n);
+        if(!n) break;
+        printf("%d\n", recurse(n));                                             ..........b
+    }
+}
+
+version 3 (algorithm)
+(Currently, there seems be some mistakes in this method, and I need further calculations whether this problem has a mathematical way to solve)
+#include<cstdio>
+#include<iostream>
+#include<cstring>
+#include<string>
+using namespace std;
+
+int main() {
+    int n;
+    while(1) {
+        scanf("%d", &n);
+        if(!n) break;
+        printf("%d\n", n % 9);                                                         .............c
+    }
+    return 0;
+}
+
+Tips:
+a) This is the method how to get the sum of every digit of an integer, pay attention to this method, it can be very helpful;
+b) This is the recursion. We just get the last number of an decreasing integer
+  and judge whether it will be zero when we divide it by ten.
+  If not, we conduct the recursion. Meanwhile, we can just refer this function in the output situation;
+c) This statement attempt to find a mathematical way to solve it, but it seems it has met some problem. 
+  I will think more about whether I can get a math's solution.
+  Overall, easy as this problem is, I also has learnt a lot after finishing it.
+  And it will be very helpful to think out as many methods as you can to solve one problem, 
+  I will insist this principle in my latter programming.
