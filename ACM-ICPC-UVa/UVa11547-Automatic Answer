@@ -1,0 +1,17 @@
+UVa11547-Automatic Answer
+
+#include<cstdio>
+int main() {
+    int t, n, result;
+    scanf("%d", &t);
+    while(t--) {
+        scanf("%d", &n);
+        int m = ((n*567/9+7492)*235/47-498)%100/10;
+        if(m > 0) result = m;
+        else result = -m;
+        printf("%d\n", result);
+    }
+    return 0;
+}
+
+Tips: The key to this program is follow the guide and do everything directly. Overall, this problem is a very easy one.
