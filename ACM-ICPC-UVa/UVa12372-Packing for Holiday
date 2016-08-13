@@ -1,0 +1,24 @@
+UVa12372-Packing for Holiday
+
+Here is the code of this easy problem:
+ 
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+using namespace std;
+
+int main() {
+    int kase = 0, T, l, w, h;
+    scanf("%d", &T);
+    while(T--) {
+        bool fit = false;
+        scanf("%d%d%d", &l, &w, &h);
+        if(l<=20 && w<=20 && h<=20) fit = true;
+        if(fit) printf("Case %d: good\n", ++kase);
+        else printf("Case %d: bad\n", ++kase);
+    }
+    return 0;
+}
+
+Tips:
+a) the key point to solve this problem is to using  the bool, if can fit, the fit bool value will be true. If not, fit will be false.
