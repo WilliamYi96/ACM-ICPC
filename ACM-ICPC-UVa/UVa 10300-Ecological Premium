@@ -1,0 +1,23 @@
+ UVa 10300-Ecological Premium
+
+#include<cstdio>
+#include<cstring>
+#include<iostream>
+#include<string>
+using namespace std;
+int main() {
+    int n, f;
+    scanf("%d", &n);
+    while(n--) {
+        int pre = 0;
+        scanf("%d", &f);
+        while(f--) {
+            int a, b, c;
+            scanf("%d%d%d", &a, &b, &c);
+            pre += a * c;
+            //the key to this problem is to understand why to write like this
+        }
+        printf("%d\n", pre);
+    }
+    return 0;
+}
