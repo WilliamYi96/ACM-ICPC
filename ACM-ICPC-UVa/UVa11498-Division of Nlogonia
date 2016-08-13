@@ -1,0 +1,23 @@
+UVa11498-Division of Nlogonia
+
+#include<cstdio>
+using namespace std;
+int main() {
+    int K, M, N, X, Y;
+    //K is the number of queries that will be made(0 < k <= 10^3)
+    //M and N is the coordinates of the division point
+    //x and Y is the coordinates of the redidence
+    while(scanf("%d", &K) == 1 && K) {
+        //pay attention to this method and it is the key to the program
+        scanf("%d%d", &M, &N);
+        while(K--) {
+            scanf("%d%d", &X, &Y);
+            if(X==M || Y==N) printf("divisa\n");
+            else if(X > M && Y > N) printf("NE\n");
+                else if(X < M && Y > N) printf("NO\n");
+                    else if(X < M && Y < N) printf("SO\n");
+                        else printf("SE\n");
+        }
+    }
+    return 0;
+}
